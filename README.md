@@ -10,7 +10,7 @@
 - TopoJSON - https://github.com/mbostock/topojson
 - JQuery - https://jquery.com/
 - Datamaps - http://datamaps.github.io/
-- Bower = http://bower.io/ 
+- Bower - http://bower.io/
 
 # TODOs
 
