@@ -1,7 +1,7 @@
 # EarthquakeVisualizer
 THIS IS MY GRAPH, THERE ARE MANY LIKE IT BUT THIS ONE IS MINE :grin:
 
-There's a handy-dandy tool called CartoDB which already does exactly what this repo does. But I wanted to make one myself. So, here it is. 
+There's a handy-dandy tool called [CartoDB](https://cartodb.com/) which already does exactly what this repo does. But I wanted to make one myself. So, here it is. 
 
 ![Screenshot](https://github.com/jamwjam/EarthquakeVisualizer/blob/master/images/Screen%20Shot%202015-06-17%20at%202.43.39%20AM.png)
 
