@@ -1,5 +1,5 @@
 # EarthquakeVisualizer
-THIS IS MY GRAPH, THERE ARE MANY LIKE IT BUT THIS ONE IS MINE
+THIS IS MY GRAPH, THERE ARE MANY LIKE IT BUT THIS ONE IS MINE :grin:
 
 There's a handy-dandy tool called CartoDB which already does exactly what this repo does. But I wanted to make one myself. So, here it is. 
 
@@ -23,7 +23,7 @@ There's a handy-dandy tool called CartoDB which already does exactly what this r
 - Zoom in feature
 
 ##Implement Animation
-- Animate Earthquake POI's over span of time
+- Animate Earthquake POI's over span of time :heavy_check_mark:
 - Edit CSS to make POI's more lively and interesting
 
 ##Research / Experiment with different projection
