@@ -1,9 +1,11 @@
-var guiOption = function () {
-    this.timeCounter = 0;
+var guiOption = function (startDate, endDate) {
+    this.timeCounter = startDate;
+    this.startDate = startDate;
+    this.endDate = endDate;
 };
 
-function setUpGUI() {
-    var options = new guiOption();
-    var gui = new dat.GUI();
-    gui.add(options, 'timeCounter', 0, 360).listen();
+function setUpGUI(options) {
+    var options;
+    var gui = new dat.GUI({width: 550 });
+    gui.add(options, 'timeCounter', options.startDate, options.endDate).listen();
 }
