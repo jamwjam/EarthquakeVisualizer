@@ -1,9 +1,13 @@
-var feed_url = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2011-05-10&endtime=2011-06-12";
+var feed_url = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2015-5-1&endtime=2051-6-9";
+var x = [1, 2, 3];
+console.log(x.shift());
+x.push(5)
+console.log(x);
 
 function get_earthquake_data() {
     var features;
     var coordinate, id, magnitude, title, date;
-    var colorScale = d3.scale.linear().domain([0, 10]).range(['yellow', 'red']);
+    var colorScale = d3.scale.linear().domain([0, 10]).range(['white', 'red']);
 
     $.getJSON(feed_url, function (result) {
 
@@ -72,8 +76,7 @@ function get_earthquake_data() {
 
         var bubbles = [];
         var visibleBubbles = [];
-        var startDate = new Date(2011, 5, 10);
-        var endDate = new Date(2011, 5, 12);
+
 
         for (i in result.features) {
             features = result.features[i];
@@ -88,7 +91,7 @@ function get_earthquake_data() {
                     time: date,
                     latitude: coordinate[1],
                     longitude: coordinate[0],
-                    radius: magnitude,
+                    radius: Math.pow(magnitude,4) / 75,
                     title: title,
                     magnitude: magnitude,
                     fillKey: Math.floor(magnitude)
@@ -96,35 +99,49 @@ function get_earthquake_data() {
             }
         }
 
-        var option = new guiOption(startDate.getTime(), endDate.getTime());
+        bubbles = bubbles.reverse();
+        console.log(bubbles[0].time);
+        console.log(bubbles[bubbles.length - 1].time);
+        var option = new guiOption(bubbles[0].time, bubbles[bubbles.length - 1].time);
 
-        var maxTime = endDate.getTime();
         var interval, popped;
 
         setUpGUI(option);
 
         function step() {
-            option.timeCounter += 1;
+            option.timeCounter += 100000;
+            console.log((new Date(option.timeCounter)).toString());
 
             if (bubbles.length > 0) {
                 // bubbles array is not empty
-                popped = bubbles.pop();
-                console.log(popped.time);
-                visibleBubbles.push(popped);
-                
+                if (option.timeCounter > bubbles[0].time) {
+                    popped = bubbles.shift();
+                    visibleBubbles.unshift(popped);
+
+                    // live update bubbles
+                    bubbleMap.bubbles(visibleBubbles, {
+                        popupTemplate: function (geo, data) {
+                            return '<div class="hoverinfo">' + data.title + '</div>';
+                        }
+                    });
+                }
+            }
+
+            if (visibleBubbles.length > 0) {
+                if (option.timeCounter < bubbles[0].time) {
+                    popped = visibleBubbles.shift();
+                    bubbles.unshift(popped);
+                }
+
                 // live update bubbles
                 bubbleMap.bubbles(visibleBubbles, {
                     popupTemplate: function (geo, data) {
                         return '<div class="hoverinfo">' + data.title + '</div>';
                     }
                 });
-            } else {
-                // bubbles array is empty
             }
 
-
-
-            if (option.timeCounter >= maxTime) {
+            if (option.timeCounter >= option.endDate) {
                 option.timeCounter = option.startDate;
             }
         }
