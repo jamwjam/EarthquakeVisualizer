@@ -1,5 +1,5 @@
 # EarthquakeVisualizer
-THIS IS MY GRAPH, THERE ARE MANY LIKE IT BUT THIS ONE IS MINE :grin:
+This is my graph, there are many like it but this one is mine :)
 
 There's a handy-dandy tool called [CartoDB](https://cartodb.com/) which already does exactly what this repo does. But I wanted to make one myself. So, here it is. 
 
